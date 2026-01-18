@@ -19,15 +19,19 @@
 			background-color: #222;
 			color: white;
 			font-family: Arial, sans-serif;
+			padding:10px;
 		}
 		canvas {
 			border: 1px solid white;
 			background-color: #333;
 		}
-
-		
 	</style>
-	<h1>Rotating cube using no 3D engine and basic algebra</h1>
+	<h3> Rotation speed</h3>
+	<input type="range" id="rotationSpeed" min="0" max="5" value = "1" step="0.1">
+	<div id="rotationValue">1</div>
+	<h3> Movement Speed</h3>
+	<input type="range" id="moveSpeed" min="0" max="5" value="1" step="0.1">
+	<div id="moveValue">1</div>
 	<canvas id="game"></canvas>
 </body>
 </html>

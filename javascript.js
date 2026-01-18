@@ -81,11 +81,28 @@ function translatez({ x, y, z }, dz) {
 let dz = 1.1
 let angle = 0
 
+const rotationSlider = document.getElementById('rotationSpeed')
+const moveSlider = document.getElementById('moveSpeed')
+
+const rotationValueDisplay = document.getElementById('rotationValue')
+const moveValueDisplay = document.getElementById('moveValue')
+
+rotationSlider.addEventListener('input', () => {
+	rotationValueDisplay.textContent = rotationSlider.value
+} )
+
+moveSlider.addEventListener('input', () => {
+	moveValueDisplay.textContent = moveSlider.value
+})
+
 function frame() {
 	const dt = 1 / FPS;
-	angle += Math.PI * dt
 
-	dz += (0.5 * dt)
+	const rotation = rotationSlider.valueAsNumber
+	angle += rotation*Math.PI * dt
+
+	const move = moveSlider.valueAsNumber
+	dz += (move * dt)
 
 	clear()
 	for (const point of points) {
