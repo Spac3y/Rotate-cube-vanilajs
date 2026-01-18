@@ -53,6 +53,26 @@ function rotatexz({ x, y, z }, angle) {
 	}
 }
 
+function rotateyz({x, y, z}, angle) {
+	const cos = Math.cos(angle)
+	const sin = Math.sin(angle)
+	return {
+		x: x,
+		y: y*cos - z*sin,
+		z: y*sin + z*cos,
+	}
+}
+
+function rotatexy({x, y, z}, angle) {
+	const cos = Math.cos(angle)
+	const sin = Math.sin(angle)
+	return {
+		x: x*cos - y*sin,
+		y: x*sin + y*cos,
+		z: z
+	}
+}
+
 const points = [
 	{ x: 0.5, y: 0.5, z: 0.5 },
 	{ x: -0.5, y: 0.5, z: 0.5 },
@@ -105,14 +125,10 @@ function frame() {
 	dz += (move * dt)
 
 	clear()
-	for (const point of points) {
-		createPoint(screen(project(translatez(rotatexz(point, angle),dz))))
-	}
-	for( const face of faces){
+	for(const face of faces){
 		for(let i=0; i<face.length; i++){
 			const a = points[face[i]];
 			const b = points[face[(i+1)%face.length]];
-			
 			line(
 				screen(project(translatez(rotatexz(a, angle),dz))),
 				screen(project(translatez(rotatexz(b, angle), dz)))
