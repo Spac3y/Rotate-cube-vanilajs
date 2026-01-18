@@ -1,16 +1,49 @@
-game.width = 800
-game.height = 800
+CANVAS_HEIGHT = 1000
+CANVAS_WIDTH = 1000
+
+game.width = CANVAS_WIDTH
+game.height = CANVAS_HEIGHT
 
 CUBE_COLOR = 'blue'
 CORNER_COLOR = 'red'
 BACKGROUND_COLOR = 'BLACK'
+DOT_COLOR = 'white'
 
 const ctx = game.getContext('2d')
 ctx.fillStyle = CUBE_COLOR
 
+function drawOx() {
+	ctx.beginPath()
+	ctx.moveTo(0, CANVAS_HEIGHT/2)
+	ctx.lineTo(CANVAS_HEIGHT, CANVAS_HEIGHT/2)
+	ctx.strokeStyle = DOT_COLOR
+	ctx.stroke()
+}
+
+function drawOy() {
+	ctx.beginPath()
+	ctx.moveTo(CANVAS_WIDTH/2, 0)
+	ctx.lineTo(CANVAS_WIDTH/2, CANVAS_HEIGHT)
+	ctx.strokeStyle = DOT_COLOR
+	ctx.stroke()
+}
+
+function drawGrid() {
+	const dot_size = 1
+	ctx.fillStyle = DOT_COLOR
+	for (let i = 0; i <= 10; ++i)
+		for (let j = 0; j <= 10; ++j) {
+			ctx.fillRect(j * 100, i * 100, dot_size, dot_size)
+		}
+}
+
 function clear() {
 	ctx.fillStyle = BACKGROUND_COLOR
 	ctx.fillRect(0, 0, game.width, game.height)
+
+	drawGrid()
+	drawOx()
+	drawOy()
 }
 
 function createPoint({ x, y }) {
