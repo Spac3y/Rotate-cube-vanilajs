@@ -115,6 +115,9 @@ moveSlider.addEventListener('input', () => {
 	moveValueDisplay.textContent = moveSlider.value
 })
 
+const MIN_Z = 1.1
+const MAX_Z = 7.5
+let returning = false
 function frame() {
 	const dt = 1 / FPS;
 
@@ -122,7 +125,12 @@ function frame() {
 	angle += rotation*Math.PI * dt
 
 	const move = moveSlider.valueAsNumber
-	dz += (move * dt)
+	dz = dz + (move*dt)*(returning ? -1 : 1)
+
+	if(dz <= MIN_Z)
+		returning = false
+	if(dz >= MAX_Z)
+		returning = true
 
 	clear()
 	for(const face of faces){
